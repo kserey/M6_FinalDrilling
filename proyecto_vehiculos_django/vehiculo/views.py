@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import VehiculoForm, CustomUserCreationForm
 from .models import Vehiculo
 from django.views.generic import CreateView
@@ -7,11 +7,7 @@ from django.contrib.auth.models import Permission
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.contrib.auth.decorators import login_required
-from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+
 
 # Create your views here.
 def index(request):
@@ -19,6 +15,9 @@ def index(request):
 
 def add(request):
     return render(request, 'add.html')
+
+def listado(request):
+    return render(request, 'listado.html')
 
 class VehiculoCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Vehiculo
@@ -52,19 +51,3 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
-
-
-@login_required
-def listar_vehiculos(request):
-    vehiculos_bajos = Vehiculo.objects.filter(precio_lt=10000)
-    vehiculos_medios = Vehiculo.objects.filter(precio_gte=10000, precio_lte=30000)
-    vehiculos_altos = Vehiculo.objects.filter(precio_gt=30000)
-
-    vehiculos = list(vehiculo.oject.all().values('marca', 'modelo', 'carroceria', 'motor', 'categoria', 'precio'))
-
-    return render(request, 'listar_vehiculos.html', {
-        'vehiculos': vehiculos,
-        'vehiculos_bajos': vehiculos_bajos,
-        'vehiculos_medios': vehiculos_medios,
-        'vehiculos_altos': vehiculos_altos,
-    })
