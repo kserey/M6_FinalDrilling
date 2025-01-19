@@ -4,13 +4,34 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a>
-        <a class="nav-link" href="{% url 'add' %}">Agregar</a>
-        <a class="nav-link" href="{% url 'listado' %}">Listado</a>
-        <a class="nav-link" href="{% url 'register' %}">Registro</a>
+      <div class="navbar-nav me-auto">
+        {% if user.is_authenticated%}
+          <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a>
+
+          {% if perms.vehiculo.add_vehiculo %}
+            <a class="nav-link" href="{% url 'add' %}">Agregar</a>
+          {% endif %}
+
+          {% if perms.vehiculo.visualizar_catalogo %}
+            <a class="nav-link" href="{% url 'listado' %}">Listado</a>
+          {% endif %}
+        {% endif %}
+          
+
       </div>
+
+      <div class="navbar-nav">
+        {% if user.is_autenticated %}
+          <span>Bienvenido, {{ user.username }}</span>
+          <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
+        {% else %}
+          <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+          <a class="nav-link" href="{% url 'register' %}">Registro</a>
+        {% endif %}
+      </div>
+
     </div>
   </div>
 </nav>
