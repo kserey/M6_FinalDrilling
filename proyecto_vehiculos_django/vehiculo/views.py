@@ -9,7 +9,6 @@ from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
-# Create your views here.
 def index(request):
     return render(request, 'index.html')
 
