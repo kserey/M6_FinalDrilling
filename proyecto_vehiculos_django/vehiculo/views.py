@@ -9,6 +9,7 @@ from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
+
 def index(request):
     return render(request, 'index.html')
 
@@ -16,7 +17,11 @@ def add(request):
     return render(request, 'add.html')
 
 def listado(request):
-    return render(request, 'listado.html')
+    vehiculos = Vehiculo.objects.all()
+    context = {
+        'vehiculos' : vehiculos
+    }
+    return render(request, 'listado.html', context)
 
 class VehiculoCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Vehiculo
@@ -26,10 +31,8 @@ class VehiculoCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView
 
     login_url = 'login'
     redirect_field_name = 'next'
-    permission_required = 'visualizar_catalogo'
 
-
-
+    permission_required = 'vehiculo.add_vehiculomodel'
 
 def register(request):
     if request.method == 'POST':

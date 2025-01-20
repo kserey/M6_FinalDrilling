@@ -10,8 +10,8 @@
         {% if user.is_authenticated%}
           <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a>
 
-          {% if perms.vehiculo.add_vehiculo %}
-            <a class="nav-link" href="{% url 'add' %}">Agregar</a>
+          {% if perms.vehiculo.add_vehiculomodel %}
+          <a class="nav-link" href="{% url 'add' %}">Agregar</a>
           {% endif %}
 
           {% if perms.vehiculo.visualizar_catalogo %}
@@ -23,9 +23,12 @@
       </div>
 
       <div class="navbar-nav">
-        {% if user.is_autenticated %}
-          <span>Bienvenido, {{ user.username }}</span>
-          <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
+        {% if user.is_authenticated %}
+          <span class="nav-link">Bienvenido, {{ user.username }}</span>
+          <form method="post" action="{% url 'logout' %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="nav-link btn btn-link">Cerrar Sesión</button>
+          </form>
         {% else %}
           <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
           <a class="nav-link" href="{% url 'register' %}">Registro</a>

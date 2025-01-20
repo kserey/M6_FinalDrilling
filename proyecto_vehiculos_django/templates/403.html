@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Acceso Denegado{% endblock %}
+
+{% block content %}
+<div style="text-align: center; padding: 50px;">
+    <h1 style="color: red;">¡Acceso Denegado!</h1>
+    <p>No tienes permisos para acceder a esta página.</p>
+    <p>Si crees que se trata de un error, ponte en contacto con el Administrador del sitio.</p>
+    <p><a href="{% url 'index' %}">Volver al inicio</a></p>
+</div>
+{% endblock %} 

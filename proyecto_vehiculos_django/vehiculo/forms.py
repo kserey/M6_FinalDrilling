@@ -9,6 +9,13 @@ class VehiculoForm(ModelForm):
         model = Vehiculo
         fields = ['marca', 'modelo', 'carroceria', 'motor', 'categoria', 'precio']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'form-control'})
+        self.fields['marca'].widget.attrs.update({'class': 'form-select'})
+        self.fields['categoria'].widget.attrs.update({'class': 'form-select'})
+
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -19,6 +26,6 @@ class CustomUserCreationForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for fieldname in ['username', 'password1', 'password2']:
+        for fieldname in ['username', 'email','password1', 'password2']:
             self.fields[fieldname].help_text = None
             self.fields[fieldname].widget.attrs.update({'class': 'form-control'})

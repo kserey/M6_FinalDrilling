@@ -26,7 +26,10 @@ class Vehiculo(models.Model):
 class Meta:
     verbose_name = 'Vehiculo'
     verbose_name_plural = 'Vehiculos'
-    permissions = [('visualizar_catalogo', 'Puede visualizar catálogo')]
+    permissions = [
+        ('add_vehiculomodel', 'Puede agregar vehículos al catálogo'),
+        ('visualizar_catalogo', 'Puede visualizar catálogo'),
+                   ]
     
 def __str__(self):
     return f'{self.marca} {self.modelo} {self.carroceria}'
