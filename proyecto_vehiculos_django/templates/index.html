@@ -2,5 +2,37 @@
 
 {% block content %}
 
-<h1 class="mt-3">Catálogo de Vehículos</h1>
+<div class="container mt-1">
+    <h1 class="text-center mb-4">Catálogo de Vehículos</h1>
+    
+    <div class="alert alert-info">
+        <h4>Bienvenido</h4>
+        <p>En esta aplicación podrás realizar las siguientes acciones:</p>
+    </div>
+    
+    <ul class="list-group">
+        <li class="list-group-item">
+            <strong>Registrarte como usuario nuevo:</strong> Se te otorgará acceso al catálogo de vehículos creados.
+        </li>
+        <li class="list-group-item">
+            <strong>Iniciar sesión:</strong> Si ya tienes una cuenta, verás el catálogo y podrás acceder a los módulos a los que tengas permisos.
+        </li>
+        <li class="list-group-item">
+            <strong>Agregar nuevos vehículos al catálogo:</strong> Si tienes los permisos necesarios, podrás añadir vehículos a la base de datos.
+        </li>
+        <li class="list-group-item">
+            <strong>Revisar el catálogo de vehículos:</strong> Consulta todos los vehículos disponibles.
+        </li>
+        <li class="list-group-item">
+            <strong>Acceder al módulo de administración:</strong> Si tienes permisos de administrador, podrás gestionar los datos de la aplicación.
+        </li>
+    </ul>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Iniciar sesión</a>
+        <a href="{% url 'register' %}" class="btn btn-success btn-lg ml-3">Registro</a>
+        <a href="/admin/" class="btn btn-danger btn-lg ml-3">Administración de Django</a>
+    </div>
+</div>
+
 {% endblock %}

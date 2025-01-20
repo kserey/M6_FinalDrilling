@@ -49,7 +49,7 @@ def register(request):
             
             login(request, user)
             messages.success(request, 'Registro exitoso')
-            return redirect('index')
+            return redirect('listado')
     else:
         form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
