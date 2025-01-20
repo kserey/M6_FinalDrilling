@@ -6,8 +6,8 @@
 
 <h1>Listado de Vehículos</h1>
 
-<table class="table table-striped">
-    <thead>
+<table class="table table-striped table-bordered table-hover table-sm">
+    <thead class="thead-dark">
         <tr>
             <th>Marca</th>
             <th>Modelo</th>
@@ -28,9 +28,12 @@
             <td>{{ vehiculo.categoria }}</td>
             <td>{{ vehiculo.precio }}</td>
             <td>
-                {% if vehiculo.precio <= 10000%} Bajo
-                {% elif vehiculo.precio > 10000 and vehiculo.precio <= 30000%} Medio
-                {% else %} Alto
+                {% if vehiculo.precio <= 10000%}
+                    <span class="badge bg-success">Bajo</span>
+                {% elif vehiculo.precio > 10000 and vehiculo.precio <= 30000%}
+                    <span class="badge bg-warning">Medio</span>
+                {% else %}
+                    <span class="badge bg-danger">Alto</span>
                 {% endif %}
             </td>
         </tr>

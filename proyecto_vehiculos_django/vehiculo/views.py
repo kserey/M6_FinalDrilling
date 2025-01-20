@@ -17,7 +17,7 @@ def add(request):
     return render(request, 'add.html')
 
 def listado(request):
-    vehiculos = Vehiculo.objects.all()
+    vehiculos = Vehiculo.objects.all().order_by('precio')
     context = {
         'vehiculos' : vehiculos
     }
